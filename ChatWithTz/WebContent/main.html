@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Chat With TZ</title>
+	<!-- 引入js库 -->
+	<script src="js/jquery-3.5.0.min.js"></script>
+	<script src="js/mainJS.js?"></script>
+	<!-- 引入css -->
+	<link href="css/main.css?" rel="stylesheet" />
+</head>
+<body>
+	<div class="centerit">
+		<div class="chat-container">
+			<aside>
+				<div class="top-bar">
+					<div class="menu-burger-container">
+						<img src="img/menu_hamburger.png">
+					</div>
+					<div class="new-conversation">新建对话</div>
+				</div>
+				<div class="conversations">
+					<div class="thread">
+						<div class="details">
+							<div class="user-head online"><img src="img/currentUser.jpg"></div>
+							<div class="user-name">田茁的robot</div>
+							<div class="last-message">我是田茁的机机人，可以和我聊天了！</div>
+						</div>
+						<div class="last">09:30</div>
+					</div>
+					<div class="thread active">
+						<div class="details">
+							<div class="user-head away"><img src="img/userTrump.jpg"></div>
+							<div class="user-name">Trump</div>
+							<div class="last-message">Nobody knows better than me!</div>
+						</div>
+						<div class="last">09:30</div>
+					</div>
+				</div>
+			</aside>
+			<main>
+				<div class="top-bar">
+					<div class="user-info">
+						<div class="user-head"><img src="img/currentUser.jpg"></div>
+						<div class="name">田茁的robot</div>
+						<div class="status online"></div>
+					</div>
+					<div class="buttons">
+						<div class="call">
+							<img src="img/telephone.png">
+						</div>
+					</div>
+				</div>
+				<div class="messages" id="messages">
+					<div class="date-split">以前或更早以前</div>
+					<div class="message">
+						<div class="user-head"><img src="img/currentUser.jpg"></div>
+						<div class="content">我是田茁的机机人，可以和我聊天了！</div>
+					</div>
+					<div class="message fromme">
+						<div class="user-head"><img src="img/myself.jpg"></div>
+						<div class="content">好的，可以和宁聊天了！</div>
+					</div>
+				</div>
+				<div class="bottom-bar">
+					<textarea class="msg-input" placeholder="send message..." onkeydown="listenEnterKey();"></textarea>
+					<div class="send-button" onclick="jqAjaxSendMessage();"><img src="img/sendbtn.png"></div>
+				</div>
+			</main>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,386 @@
+.robot_msg {
+    font-size: 12px;
+    color: red;
+    display: block;
+    height: 16px;
+    line-height: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background: linear-gradient(100deg, #0052d4, #4364f7, #5580b1);
+    width: 100vw;
+    height: 100vh;
+}
+
+.centerit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.chat-container {
+    background-color: #f4f4f4;
+    width: 1200px;
+    height: 730px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.chat-container .top-bar {
+    width: 100%;
+    height: 80px;
+    display: flex;
+}
+
+.chat-container .user-head img {
+    border-radius: 50%;
+    width: 49px;
+    height: 49px;
+}
+
+.chat-container aside {
+    width: 425px;
+    height: 100%;
+    background-color: #363e47;
+    display: flex; /*弹性布局*/
+    flex-direction: column;  /*纵向排列*/
+}
+
+.chat-container aside .top-bar {
+    background-color: #303841;
+    justify-content: space-between; /*平铺开来*/
+}
+
+.chat-container aside .menu-burger-container {
+    margin: 20px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.chat-container aside .menu-burger-container img{
+    height: 35px;
+    width: 35px;
+    filter: grayscale(100%); 
+    opacity: 0.6;
+    transition: all 200ms ease-in-out;
+}
+
+.chat-container aside .menu-burger-container img:hover{
+    filter: none; 
+    opacity: 1;
+}
+
+.chat-container aside .new-conversation {
+    height: 42px;
+    padding: 0 20px;
+    margin: 19px 30px;
+    background-color: #01e777;
+    border-radius: 25px;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    line-height: 42px;
+    box-sizing: content-box;
+    border: solid #01e777 0px;
+    transition: all 200ms ease-in-out;
+    font-size: 15px;
+}
+.chat-container aside .new-conversation:hover {
+    transition: all 70ms ease-in-out;
+    transform: translate(2px, -2px);  /* 与下一行设置边框关联，x向右平移，y向下平移 */
+    border: solid #01e777 2px;  /* 与上一行的平移关联，增大边框，起到增大按钮效果 */
+}
+
+/* 消息列表部分 */
+.chat-container aside .conversations {
+    height: calc(100% - 80px);
+    width: 100%;
+}
+  .chat-container aside .conversations .thread {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.chat-container aside .conversations .thread.active {
+    background-color: #3f4953;
+}
+.chat-container aside .conversations .thread:hover {
+    background-color: #3f4953;
+}
+.chat-container aside .conversations .thread .details {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "user-image user-name" "user-image last-message";
+    margin: 17px;
+    align-items: center;
+}
+.chat-container aside .conversations .thread .details .user-head {
+    grid-area: user-image;
+    margin-right: 20px;
+}
+
+.chat-container .user-head:after {
+    content: '';    /* 消息列表中的用户在线状态*/
+    display: block;
+    position: relative;
+    width: 11px;
+    height: 11px;
+    background-color: #f95b55;
+    bottom: 19px;
+    right: -33px;
+    border-radius: 50%;
+    border: solid 3px #363e47;
+}
+.chat-container .user-head.online:after {
+    background-color: #01e777;
+}
+
+.chat-container aside .conversations .thread .details .user-name, .chat-container aside .conversations .thread .details .last-message {
+    width: 260px;  /* 消息列表中，用户最后一条消息 */
+}
+
+.chat-container aside .conversations .thread .details .user-name {
+    grid-area: user-name;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+}
+.chat-container aside .conversations .thread .details .last-message {
+    grid-area: last-message;
+    color: #88929c;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-container aside .conversations .thread .last {  /* 时间的显示 */
+    height: 22px;
+    width: 50px;
+    border-radius: 11px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 22px;
+    font-size: 12px;
+    background-color: #303841;
+    position: relative;
+    top: 21px;
+    right: 17px;
+}
+
+/*  消息主题部分 */
+.chat-container main {
+    width: 775px;
+    height: 100%;
+    background-color:  #f4f4f4;
+    display: flex; /*弹性布局*/
+    flex-direction: column;  /*纵向排列*/
+}
+
+.chat-container main .top-bar {
+    background-color: #ffffff;
+    border-bottom: solid 1px #d6d6d6; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+}
+
+.chat-container main .top-bar .user-info {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "user-image user-name" "user-image user-status";
+    align-items: center;
+  }
+.chat-container main .top-bar .user-info .user-head {
+    grid-area: user-image;
+    margin-right: 20px;
+}
+.chat-container main .top-bar .user-info .user-head:after{
+    display: none;   /* 把消息列表中 统一的在线状态 删了*/
+}
+
+.chat-container main .top-bar .user-info .name {
+    grid-area: user-name;
+    font-size: 23px;
+    position: relative;
+    top: 6px;
+}
+.chat-container main .top-bar .user-info .status {
+    grid-area: user-status;       /* 当前对象的在线状态 */
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -3px;
+}
+.chat-container main .top-bar .user-info .status:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+    background-color: #f95b55;
+    margin-right: 5px;
+  }
+.chat-container main .top-bar .user-info .status.online:before {
+    background-color: #01e777;
+}
+.chat-container main .top-bar .user-info .status:after {
+    content: 'online';
+}
+
+.chat-container main .top-bar .buttons img {
+    height: 25px;
+}
+
+/*电话按钮，通过改变灰度形成鼠标移入的效果*/
+.chat-container main .top-bar .buttons img {
+    height: 25px;
+    filter: grayscale(100%); 
+    opacity: 0.6;
+}
+.chat-container main .top-bar .buttons img:hover {
+    filter: none; 
+    opacity: 1;
+}
+.chat-container main .top-bar .buttons div {
+    cursor: pointer;
+}
+
+/* messages 部分 */
+.chat-container main .messages {
+    height: calc(100% - 160px);  /*减去上下的两个bar高度*/
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;    /*上下滚动方式*/
+}
+
+.chat-container main .messages .date-split {
+    text-align: center;
+    color: #afafaf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .chat-container main .messages .date-split:before, .chat-container main .messages .date-split:after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100px;
+    background-color: #c4c3c3;
+}
+.chat-container main .messages .date-split:before {
+    margin-right: 20px;
+}
+.chat-container main .messages .date-split:after {
+    margin-left: 20px;
+}
+
+.chat-container main .messages .message {
+    display: flex;
+    margin: 20px;
+    position: relative;
+}
+.chat-container main .messages .message .user-head:after{
+    display: none;   /* 把消息列表中 统一的在线状态 删了*/
+}
+
+.chat-container main .messages .message:after {
+  content: '';   /* 左边气泡的三角形 */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 15px 0;
+  border-color: transparent #ffffff transparent transparent;
+  position: absolute;
+  left: 59px;
+}
+.chat-container main .messages .message .content {
+    max-width: 70%;  /* 左边气泡主体，与前面的三角组合在一起 */
+    width: fit-content;
+    height: fit-content;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 0 10px 10px 10px;
+    margin-left: 30px;
+    color: #626c76;
+}
+
+.chat-container main .messages .message.fromme {
+    flex-direction: row-reverse;
+}
+.chat-container main .messages .message.fromme:after {
+    border-width: 15px 20px 0 0;  /* 右边气泡的三角形 */
+    border-color: #ffffff transparent transparent transparent;
+    right: 59px;
+    left: unset;
+}
+.chat-container main .messages .message.fromme .content {
+    border-radius: 10px 0px 10px 10px;   /* 右边气泡主体，与前面的三角组合在一起 */
+    margin-left: unset;
+    margin-right: 30px;
+    background-color: #fff;
+    color: #626c76;
+}
+
+/* main 的  bottom-bar */
+.chat-container main .bottom-bar {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-container main .bottom-bar .msg-input {
+    width: calc(100% - 160px);
+    margin: 30px;
+    height: 40px;
+    border-radius: 30px;
+    border: 0px;
+    background-color: #ececec;
+    padding: 10px 15px 0px 15px;
+    font-size: 18px;
+}
+.chat-container main .bottom-bar .msg-input::placeholder {
+    color: #c5c5c5;  /*placeholder的颜色灰一点*/
+}
+
+.chat-container main .bottom-bar .send-button {
+    box-sizing: content-box;
+    width: 30px;
+    height: 30px;
+    padding: 10px 25px 10px 10px;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.chat-container main .bottom-bar .send-button img {
+    width: 40px;
+    height: 40px;
+    filter: grayscale(100%); 
+    opacity: 0.6;
+}
+
+.chat-container main .bottom-bar .send-button img:hover {
+    width: 40px;
+    height: 40px;
+    filter: none; 
+    opacity: 1;
+}
+
+
